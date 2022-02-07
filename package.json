@@ -1,0 +1,22 @@
+{
+  "name": "EatXyn",
+  "version": "1.0.0",
+  "description": "Eat xyn game.",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc"
+  },
+  "repository": "git@github.com:qyl27/EatXyn.git",
+  "author": "秋雨落 <i@rain.cx>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "createjs": "^1.0.1",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "nodaemon": "^0.0.5",
+    "ts-node": "^10.4.0"
+  }
+}
