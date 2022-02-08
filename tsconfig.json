@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2022",
     "outDir": "./build",
     "removeComments": true,
-    "isolatedModules": true,
     "strict": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true
   },
   "include": [
-    "./src/**/*", "__tests__",
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules", "build"
