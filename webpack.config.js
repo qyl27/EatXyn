@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    target: 'node',
+    mode: "development",
     entry: './src/app.ts',
     devtool: 'inline-source-map',
     watch: true,
@@ -35,11 +37,17 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
+                loader: 'file-loader',
+                options: {
+                    name: '/assets/pictures/[name].[ext]'
+                }
             },
             {
                 test: /\.(wav|mp3)$/i,
-                type: 'asset/resource',
+                loader: 'file-loader',
+                options: {
+                    name: '/assets/sounds/[name].[ext]'
+                }
             },
             {
                 test: /\.css$/,

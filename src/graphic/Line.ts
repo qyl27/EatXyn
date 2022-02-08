@@ -7,9 +7,14 @@ export default class Line extends PIXI.Graphics {
         this.lineStyle(lineWidth, lineColor);
     }
 
-    draw(fromX: number, fromY: number, toX: number, toY: number): void {
+    public draw(fromX: number, fromY: number, toX: number, toY: number): void {
         this.moveTo(fromX, fromY);
         this.lineTo(toX, toY);
+        this.moveTo(0, 0);
         // console.log(`${fromX} ${fromY} ${toX} ${toY}`);
+    }
+
+    public setStyle(lineWidth: number = 3, lineColor: number = 0x66ccff): void {
+        this.lineStyle(lineWidth, lineColor);
     }
 }
