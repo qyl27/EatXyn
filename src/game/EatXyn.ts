@@ -1,12 +1,13 @@
 import * as PIXI from 'pixi.js';
 import Grid from "../graphic/Grid";
 import Xyns from "./Xyns";
+import Board from "./Board";
 
 export default class EatXyn {
     protected app: PIXI.Application;
     protected elapsed: number = 0;
 
-    protected grid: Grid;
+    protected panel: Board;
 
     constructor() {
         this.app = new PIXI.Application({
@@ -22,26 +23,32 @@ export default class EatXyn {
            this.onResize(window.innerWidth, window.innerHeight);
         });
 
-        this.grid = new Grid(this.app);
-
-        new Xyns();
+        this.panel = new Board(this.app);
     }
 
     public run(): void {
-        this.loadMain();
+        this.load();
 
         this.app.ticker.add((delta) => this.tick(delta));
+    }
+
+    private load(): void {
+        this.panel.load();
     }
 
     public tick(delta: number): void {
         this.elapsed += delta;
 
-        this.render();
+        if (this.elapsed >= 30.0) { // Slow down.
+            this.elapsed = 0;
+
+            this.render();
+        }
     }
 
     protected render(): void {
         // Draw grid.
-        this.grid.render();
+        this.panel.render();
     }
 
     protected onResize(width: number, height: number): void {
@@ -51,10 +58,6 @@ export default class EatXyn {
         this.app.view.height = height;
 
         this.app.renderer.resize(width, height);
-        this.grid.resize();
-    }
-
-    private loadMain(): void {
-
+        this.render();
     }
 }
