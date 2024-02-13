@@ -1,13 +1,12 @@
 import * as PIXI from 'pixi.js';
-import Xyns from "./Xyns";
+import Xyn from "./Xyn";
 import Grid from "../graphic/Grid";
+import WidgetBase from "./WidgetBase";
 
-export default class Board {
+export default class Board extends WidgetBase {
     protected app: PIXI.Application;
 
     protected grid: Grid;
-
-    protected xyns: Xyns;
 
     columnCount: number;
     gridSize: number;
@@ -16,29 +15,29 @@ export default class Board {
     public constructor(app: PIXI.Application,
                        columnCount: number = 4,
                        gridSize: number = 100, lineWidth: number = 2) {
+        super();
         this.app = app;
 
         this.columnCount = columnCount;
         this.gridSize = gridSize;
         this.lineWidth = lineWidth;
 
-        this.xyns = new Xyns();
-
         this.grid = new Grid(this.app, this.getStartX(), this.getLastY(), this.getColumnCount(), this.getRowCount());
     }
 
     public load(): void {
-        this.xyns.load();
-
-
     }
 
-    public resetBoard(): void {
-        
+    public tick(): void {
     }
 
     public render(): void {
         this.grid.render();
+    }
+
+    public resize(): void {
+        this.grid.startXPos = this.getStartX();
+        this.grid.lastYPos = this.getLastY();
     }
 
     public getColumnCount(): number {

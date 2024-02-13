@@ -1,13 +1,12 @@
 import * as PIXI from 'pixi.js';
-import Grid from "../graphic/Grid";
-import Xyns from "./Xyns";
 import Board from "./Board";
+import WidgetBase from "./WidgetBase";
 
 export default class EatXyn {
     protected app: PIXI.Application;
     protected elapsed: number = 0;
 
-    protected panel: Board;
+    private widgets: WidgetBase[] = [];
 
     constructor() {
         this.app = new PIXI.Application({
@@ -17,13 +16,14 @@ export default class EatXyn {
             backgroundColor: 0xffffff
         });
 
-        document.body.appendChild(this.app.view);
+        document.body.appendChild(this.app.view as HTMLCanvasElement);
 
         window.addEventListener("resize", () => {
            this.onResize(window.innerWidth, window.innerHeight);
         });
 
-        this.panel = new Board(this.app);
+        let panel = new Board(this.app);
+        this.widgets.push(panel);
     }
 
     public run(): void {
@@ -33,7 +33,7 @@ export default class EatXyn {
     }
 
     private load(): void {
-        this.panel.load();
+        this.widgets.forEach(w => w.load());
     }
 
     public tick(delta: number): void {
@@ -42,22 +42,23 @@ export default class EatXyn {
         if (this.elapsed >= 30.0) { // Slow down.
             this.elapsed = 0;
 
+            this.widgets.forEach(w => w.tick());
+
             this.render();
         }
     }
 
     protected render(): void {
-        // Draw grid.
-        this.panel.render();
+        this.widgets.forEach(w => w.render());
     }
 
     protected onResize(width: number, height: number): void {
-        console.log(`Width: ${width}, Height: ${height}`)
-
         this.app.view.width = width;
         this.app.view.height = height;
 
         this.app.renderer.resize(width, height);
-        this.render();
+        this.app.resize();
+
+        this.widgets.forEach(w => w.resize());
     }
 }

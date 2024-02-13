@@ -22,12 +22,12 @@ export default class ClickablePic extends PIXI.Sprite {
         this.hold = this.setPosAndSize(hold, width, height, x, y);
         this.over = this.setPosAndSize(over, width, height, x, y);
 
-        onPic
-            .on('pointerdown', onButtonUp)
-            .on('pointerup', onButtonUp)
-            .on('pointerout', onButtonUp)
-            .on('pointerover', onButtonOver)
-            .on('pointerout', onButtonOut);
+        // onPic
+        //     .on('pointerdown', onButtonUp)
+        //     .on('pointerup', onButtonUp)
+        //     .on('pointerout', onButtonUp)
+        //     .on('pointerover', onButtonOver)
+        //     .on('pointerout', onButtonOut);
     }
 
     public setPosAndSize(pic: PIXI.Sprite,
